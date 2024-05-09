@@ -1,0 +1,28 @@
+{
+  "name": "produksiapp",
+  "version": "1.0.0",
+  "description": "Produksi App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raffimh/produksiApp.git"
+  },
+  "author": "Raffi Maulana Hadi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raffimh/produksiApp/issues"
+  },
+  "homepage": "https://github.com/raffimh/produksiApp#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "ejs-lint": "^2.0.0",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.9.7",
+    "nodemon": "^3.1.0"
+  }
+}
