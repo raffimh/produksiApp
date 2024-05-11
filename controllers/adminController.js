@@ -4,6 +4,7 @@ exports.getDatatables = (req, res, next) => {
   res.render("datatables", {
     pageTitle: "Datatables",
     path: "/datatables",
+    currentPage: req.originalUrl,
   });
 };
 
@@ -28,4 +29,12 @@ exports.getProducts = async (req, res, next) => {
     console.log(err);
     res.status(500).json({ error: "Internal Server Error" });
   }
+};
+
+exports.getInputProduct = (req, res, next) => {
+  res.render("inputProduct", {
+    pageTitle: "Input Product",
+    path: "/input-product",
+    currentPage: req.originalUrl,
+  });
 };
