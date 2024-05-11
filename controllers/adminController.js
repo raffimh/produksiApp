@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const toastr = require("toastr");
 
 exports.getDatatables = (req, res, next) => {
   res.render("datatables", {
@@ -37,4 +38,43 @@ exports.getInputProduct = (req, res, next) => {
     path: "/input-product",
     currentPage: req.originalUrl,
   });
+};
+
+exports.getPostProduct = async (req, res, next) => {
+  const {
+    nomor_order,
+    quantity,
+    nama_barang,
+    size,
+    tutup,
+    body,
+    elektroplating,
+    isi,
+    rakit,
+    qc,
+    packing,
+  } = req.body;
+  console.log(req.body);
+  try {
+    const product = new Product(
+      nomor_order,
+      quantity,
+      nama_barang,
+      size,
+      tutup,
+      body,
+      elektroplating,
+      isi,
+      rakit,
+      qc,
+      packing
+    );
+    await product.save();
+
+    // Kirim respons ke client (browser) setelah berhasil
+    res.status(200).send("Data berhasil disimpan!");
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).send("Internal Server Error");
+  }
 };

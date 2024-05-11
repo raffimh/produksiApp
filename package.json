@@ -27,6 +27,7 @@
     "express-session": "^1.18.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.9.7",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "toastr": "^2.1.4"
   }
 }

@@ -26,6 +26,33 @@ module.exports = class Product {
     this.qc = qc;
     this.packing = packing;
   }
+  async save() {
+    try {
+      const sql = `
+        INSERT INTO product 
+        (nomor_order, quantity, nama_barang, size, tutup, body, elektroplating, isi, rakit, qc, packing) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `;
+      const values = [
+        this.nomor_order,
+        this.quantity,
+        this.nama_barang,
+        this.size,
+        this.tutup,
+        this.body,
+        this.elektroplating,
+        this.isi,
+        this.rakit,
+        this.qc,
+        this.packing,
+      ];
+
+      const [result] = await db.execute(sql, values);
+      return result; // Mengembalikan hasil dari operasi INSERT
+    } catch (err) {
+      throw new Error(`Error saving product: ${err.message}`);
+    }
+  }
 
   static async fetchAll() {
     try {

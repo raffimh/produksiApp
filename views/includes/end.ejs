@@ -3,6 +3,7 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/js/bootstrap.js"></script>
     <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
@@ -22,6 +23,7 @@
 
 
 
+
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
 
@@ -29,6 +31,63 @@
     <script src="assets/js/pages-auth.js"></script>
     <script src="assets/js/tables-datatables-extensions.js"></script>
     <script src="assets/js/form-basic-inputs.js"></script>
+    <script src="assets/vendor/libs/toastr/toastr.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        toastr.options = {
+          closeButton: true,
+          debug: false,
+          newestOnTop: false,
+          progressBar: false,
+          positionClass: 'toast-bottom-left',
+          preventDuplicates: false,
+          onclick: null,
+          showDuration: '300',
+          hideDuration: '1000',
+          timeOut: '5000',
+          extendedTimeOut: '1000',
+          showEasing: 'swing',
+          hideEasing: 'linear',
+          showMethod: 'fadeIn',
+          hideMethod: 'fadeOut'
+        };
+
+        // Fungsi untuk menampilkan pesan toastr dari local storage
+        function showStoredToastr() {
+          const storedMessage = localStorage.getItem('successMessage');
+          if (storedMessage) {
+            toastr.success(storedMessage);
+            localStorage.removeItem('successMessage'); // Hapus pesan dari local storage setelah ditampilkan
+          }
+        }
+
+        showStoredToastr();
+
+        // Menggunakan AJAX untuk menangani submit form
+        $("form").submit(function(e) {
+          e.preventDefault(); // Menghentikan default form submission
+
+          // Mengambil data form
+          var formData = $(this).serialize();
+          // Melakukan AJAX POST request
+          $.ajax({
+            type: "POST",
+            url: "/submit-product",
+            data: formData,
+            success: function(response) {
+              // Simpan pesan sukses di local storage
+              localStorage.setItem('successMessage', 'Data berhasil disimpan!');
+              window.location.reload();
+            },
+            error: function(error) {
+              console.error("Error:", error.responseText);
+              toastr.error("Terjadi kesalahan saat menyimpan data.");
+            },
+          });
+        });
+      });
+    </script>
 
     </body>
 

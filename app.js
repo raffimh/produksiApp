@@ -11,9 +11,10 @@ const adminRoutes = require("./routes/adminRoutes");
 // const db = require("./config/database");
 
 // app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
+app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", "views");
 
