@@ -3,7 +3,7 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="assets/vendor/libs/popper/popper.js"></script>
     <script src="assets/vendor/js/bootstrap.js"></script>
     <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
@@ -65,6 +65,82 @@
         }
 
         showStoredToastr();
+
+        // Login form
+        // $("form#formLogin").submit(function(e) {
+        //   e.preventDefault();
+
+        //   const formData = $(this).serialize();
+        //   console.log("Form data:", formData);
+
+        //   $.ajax({
+        //     type: "POST",
+        //     url: "/auth/login",
+        //     data: formData,
+        //     success: function(response) {
+        //       console.log("Response dari server:", response);
+
+        //       // Redirect ke halaman setelah login berhasil
+        //       localStorage.setItem("successMessage", "Berhasil Login");
+        //       window.location.href = '/datatables';
+        //     },
+        //     error: function(xhr, status, error) {
+        //       console.error("Error:", error); // Tampilkan error di console untuk debugging
+        //       console.error("Server Response:", xhr.responseText); // Tampilkan pesan error dari server
+        //       alert("Error: " + xhr.responseText); // Tampilkan pesan error dari server
+        //     }
+        //   });
+        // });
+
+        $("form#formLogin").submit(function(e) {
+          e.preventDefault();
+
+          const formData = $(this).serialize();
+
+          $.ajax({
+            type: "POST",
+            url: "/api/login",
+            data: formData,
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded",
+            success: function(response) {
+              if (response.success) {
+                // Login berhasil, redirect ke halaman /datatables
+                window.location.href = "/datatables";
+              } else {
+                // Login gagal
+                toastr.error(response.message);
+              }
+            },
+            error: function(xhr, status, error) {
+              console.error("Error:", error);
+              console.error("Server Response:", xhr.responseText);
+              toastr.error("Terjadi kesalahan saat login: " + xhr.responseText);
+            }
+          });
+        });
+
+        $("form#formSignup").submit(function(e) {
+          e.preventDefault();
+
+          const formData = $(this).serialize();
+
+          $.ajax({
+            type: "POST",
+            url: "/auth/register", // Rute untuk pendaftaran
+            data: formData,
+            success: function(response) {
+              console.log(response);
+              // Redirect ke halaman setelah pendaftaran berhasil
+              localStorage.setItem("successMessage", "Berhasil Register");
+              window.location.href = '/';
+            },
+            error: function(error) {
+              console.error("Error:", error.responseText);
+              alert("Error registering user");
+            }
+          });
+        });
 
         // Event listener untuk submit product
         $("form#submit-product").submit(function(e) {

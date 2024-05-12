@@ -40,13 +40,18 @@
 
           <div class="card-body mt-1">
             <h4 class="mb-1">Welcome to Production App</h4>
-            <p class="mb-5">Please sign-in to your account</p>
+            <p class="mb-5">Please sign-up</p>
 
-            <form action="/auth/login" method="POST" id="formAuthentication formLogin" class=" mb-5">
+            <form id="formSignup" class="mb-5" action="/auth/register" method="POST">
               <div class="form-floating form-floating-outline mb-5">
                 <input type="text" class="form-control" id="email" name="emailUsername" placeholder="Enter your username" autofocus />
                 <label for="email">Username</label>
               </div>
+              <div class="form-floating form-floating-outline mb-5">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" autofocus />
+                <label for="name">Name</label>
+              </div>
+
               <div class="mb-5">
                 <div class="form-password-toggle">
                   <div class="input-group input-group-merge">
@@ -58,30 +63,22 @@
                   </div>
                 </div>
               </div>
-              <div class="mb-5 d-flex justify-content-between mt-5">
-                <div class="form-check mt-2">
-                  <input class="form-check-input" type="checkbox" id="remember-me" />
-                  <label class="form-check-label" for="remember-me">
-                    Remember Me
-                  </label>
-                </div>
-                <a href="auth-forgot-password-basic.html" class="float-end mb-1 mt-2">
-                  <span>Forgot Password?</span>
-                </a>
+              <div class="mb-5">
+                <label for="role">Pilih Role</label>
+                <select class="form-control" id="role" name="role" autofocus>
+                  <option value="office">Office</option>
+                  <option value="produksi">Produksi</option>
+                </select>
               </div>
+
               <div class="mb-5">
                 <button class="btn btn-primary d-grid w-100" type="submit">
-                  Sign in
+                  Sign up
                 </button>
               </div>
             </form>
 
-            <p class="text-center">
-              <span>New on our platform?</span>
-              <a href="auth-register-basic.html">
-                <span>Create an account</span>
-              </a>
-            </p>
+
 
             <!-- <div class="divider my-5">
               <div class="divider-text">or</div>
@@ -119,9 +116,10 @@
           </div>
         </div>
         <!-- /Login -->
-        <img alt="mask" src="../../assets/img/illustrations/auth-basic-login-mask-light.png" class="authentication-image d-none d-lg-block" data-app-light-img="illustrations/auth-basic-login-mask-light.png" data-app-dark-img="illustrations/auth-basic-login-mask-dark.png" />
+        <img alt="mask" src="assets/img/illustrations/auth-basic-register-mask-light.png" class="authentication-image d-none d-lg-block" data-app-light-img="illustrations/auth-basic-register-mask-light.png" data-app-dark-img="illustrations/auth-basic-login-mask-dark.png" />
       </div>
     </div>
   </div>
+
 
   <%- include('includes/end.ejs') %>
