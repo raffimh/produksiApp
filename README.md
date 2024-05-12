@@ -33,12 +33,12 @@ This system supports two user roles: Office and Production.
 1. **Install Dependencies**
    Make sure you have Node.js and npm (Node Package Manager) installed on your computer. Then, install all dependencies by running the following command in the terminal:
 
-NPM Install
+### `npm install`
 
 2. **Start the Application**
 After the installation is complete, start the application by running the command:
 
-npm start
+### `npm start`
 
 
 The application will run on `http://localhost:5000`. Open your browser and visit this URL to view the application.
