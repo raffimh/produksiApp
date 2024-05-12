@@ -32,6 +32,8 @@
     <script src="assets/js/tables-datatables-extensions.js"></script>
     <script src="assets/js/form-basic-inputs.js"></script>
     <script src="assets/vendor/libs/toastr/toastr.js"></script>
+    <script src="assets/js/tables-datatables-advanced.js"></script>
+
 
     <script>
       $(document).ready(function() {
@@ -93,6 +95,9 @@
           // Mengambil nomor_order dari data-nomor_order atribut tombol
           const nomor_order = $(this).data("nomor_order");
 
+          // Nonaktif tombol setelah diklik
+          $(this).prop('disabled', true);
+
           // Melakukan AJAX POST request untuk edit product
           $.ajax({
             type: "POST",
@@ -106,6 +111,8 @@
             error: function(error) {
               console.error("Error:", error.responseText);
               toastr.error("Terjadi kesalahan saat memperbarui produk.");
+              // Aktifkan kembali tombol jika ada kesalahan
+              $(".update-product").prop('disabled', false);
             },
           });
         });

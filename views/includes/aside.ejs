@@ -51,14 +51,14 @@
       </a>
     </li>
 
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link">
+    <li class="menu-item <%= currentPage === '/finished-product' ? 'active' : '' %>">
+      <a href="/finished-product" class="menu-link">
         <i class="menu-icon tf-icons ri-table-alt-line"></i>
         <div data-i18n="Finished Products">Finished Products</div>
       </a>
     </li>
 
-    <!-- Misc -->
+    <!-- Misc
     <li class="menu-header mt-5">
       <span class="menu-header-text" data-i18n="Misc">Misc</span>
     </li>
@@ -73,8 +73,8 @@
         <i class="menu-icon tf-icons ri-article-line"></i>
         <div data-i18n="Documentation">Documentation</div>
       </a>
-    </li>
-    <li class="menu-item>">
+    </li> -->
+    <li class="menu-item pt-xxl-12">
       <div class="d-grid px-4 pt-2 pb-1">
         <a class="btn btn-sm btn-danger d-flex" href="auth-login-cover.html" target="_blank">
           <small class="align-middle">Logout</small>

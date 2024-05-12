@@ -1,5 +1,5 @@
 const Product = require("../models/Product");
-const toastr = require("toastr");
+const Finished = require("../models/Finished");
 
 exports.getDatatables = (req, res, next) => {
   res.render("datatables", {
@@ -94,6 +94,25 @@ exports.postUpdateProduct = async (req, res, next) => {
     product.packing = packing;
 
     await product.updateByNomorOrder(nomor_order);
+    // Check if all stages are finished
+    if (
+      product.tutup.toString() === "3" &&
+      product.body.toString() === "3" &&
+      product.elektroplating.toString() === "3" &&
+      product.isi.toString() === "3" &&
+      product.rakit.toString() === "3" &&
+      product.qc.toString() === "3" &&
+      product.packing.toString() === "3"
+    ) {
+      const finishedProduct = new Finished(
+        null,
+        product.nomor_order,
+        product.quantity,
+        product.nama_barang,
+        product.size
+      );
+      await finishedProduct.save();
+    }
 
     res.status(200).send("Data berhasil disimpan!");
   } catch (err) {
@@ -157,3 +176,20 @@ exports.deleteProduct = async (req, res, next) => {
   }
 };
 
+exports.getFinished = (req, res, next) => {
+  res.render("finishedProduct", {
+    pageTitle: "Finished Product",
+    path: "/finished-product",
+    currentPage: req.originalUrl,
+  });
+};
+
+exports.getFinishedProduct = async (req, res, next) => {
+  try {
+    const finishedProducts = await Finished.fetchAll();
+    res.json({ data: finishedProducts });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
