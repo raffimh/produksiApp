@@ -69,7 +69,7 @@
           e.preventDefault(); // Menghentikan default form submission
 
           // Mengambil data form
-          var formData = $(this).serialize();
+          const formData = $(this).serialize();
 
           // Melakukan AJAX POST request untuk submit product
           $.ajax({
@@ -91,7 +91,7 @@
         // Event listener untuk edit product
         $(".update-product").click(function() {
           // Mengambil nomor_order dari data-nomor_order atribut tombol
-          var nomor_order = $(this).data("nomor_order");
+          const nomor_order = $(this).data("nomor_order");
 
           // Melakukan AJAX POST request untuk edit product
           $.ajax({
