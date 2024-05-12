@@ -110,6 +110,15 @@ document.addEventListener("DOMContentLoaded", function () {
       scrollX: true,
       dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
     });
+
+    // Event listener untuk tombol edit
+    dt_scrollable_table.on("click", ".item-edit", function () {
+      var data = dt_scrollable_table
+        .DataTable()
+        .row($(this).parents("tr"))
+        .data();
+      window.location.href = "/edit-product/" + data.nomor_order;
+    });
   }
 
   function translateStatus(value) {

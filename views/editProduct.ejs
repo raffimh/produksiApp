@@ -30,28 +30,28 @@
             <div class="col-md-8">
               <div class="card mb-6">
                 <div class="card-body demo-vertical-spacing demo-only-element">
-                  <form action="/submit-product" id="submit-product" method="POST" class="row g-3">
+                  <form action="/edit-product/<%= product.nomor_order%>" id="edit-product-<%= product.nomor_order %>" method="POST" class="row g-3">
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="text" class="form-control" id="noOrder" name="nomor_order" placeholder="1212" required>
+                        <input type="text" class="form-control" id="noOrder" name="nomor_order" placeholder="1212" value="<%= product.nomor_order %>  " required>
                         <label for="noOrder">No. Order</label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="120" required>
+                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="120" value="<%= product.quantity %>" required>
                         <label for="quantity">Quantity</label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="text" class="form-control" id="namaBarang" name="nama_barang" placeholder="Barang Produksi" required>
+                        <input type="text" class="form-control" id="namaBarang" name="nama_barang" placeholder="Barang Produksi" value="<%= product.nama_barang %>" required>
                         <label for="namaBarang">Nama Barang</label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="number" class="form-control" id="size" name="size" placeholder="50" required>
+                        <input type="number" class="form-control" id="size" name="size" placeholder="50" value="<%= product.size %>" required>
                         <label for="size">Size</label>
                       </div>
                     </div>
@@ -59,9 +59,9 @@
                       <div class="mb-3">
                         <label for="tutup">Tutup</label>
                         <select class="form-select" id="tutup" name="tutup" required>
-                          <option value="1">On Process</option>
-                          <option value="2">Delayed</option>
-                          <option value="3">Finished</option>
+                          <option value="1" <%= product.tutup === 1 ? 'selected' : '' %>>On Process</option>
+                          <option value="2" <%= product.tutup === 2 ? 'selected' : '' %>>Delayed</option>
+                          <option value="3" <%= product.tutup === 3 ? 'selected' : '' %>>Finished</option>
                         </select>
                       </div>
                     </div>
@@ -69,9 +69,9 @@
                       <div class="mb-3">
                         <label for="body">Body</label>
                         <select class="form-select" id="body" name="body" required>
-                          <option value="1">On Process</option>
-                          <option value="2">Delayed</option>
-                          <option value="3">Finished</option>
+                          <option value="1" <%= product.body === 1 ? 'selected' : '' %>>On Process</option>
+                          <option value="2" <%= product.body === 2 ? 'selected' : '' %>>Delayed</option>
+                          <option value="3" <%= product.body === 3 ? 'selected' : '' %>>Finished</option>
                         </select>
                       </div>
                     </div>
@@ -79,9 +79,9 @@
                       <div class="mb-3">
                         <label for="elektroplating">Elektroplating</label>
                         <select class="form-select" id="elektroplating" name="elektroplating" required>
-                          <option value="1">On Process</option>
-                          <option value="2">Delayed</option>
-                          <option value="3">Finished</option>
+                          <option value="1" <%= product.elektroplating === 1 ? 'selected' : '' %>>On Process</option>
+                          <option value="2" <%= product.elektroplating === 2 ? 'selected' : '' %>>Delayed</option>
+                          <option value="3" <%= product.elektroplating === 3 ? 'selected' : '' %>>Finished</option>
                         </select>
                       </div>
                     </div>
@@ -89,9 +89,9 @@
                       <div class="mb-3">
                         <label for="isi">Isi</label>
                         <select class="form-select" id="isi" name="isi" required>
-                          <option value="1">On Process</option>
-                          <option value="2">Delayed</option>
-                          <option value="3">Finished</option>
+                          <option value="1" <%= product.isi === 1 ? 'selected' : '' %>>On Process</option>
+                          <option value="2" <%= product.isi === 2 ? 'selected' : '' %>>Delayed</option>
+                          <option value="3" <%= product.isi === 3 ? 'selected' : '' %>>Finished</option>
                         </select>
                       </div>
                     </div>
@@ -99,9 +99,9 @@
                       <div class="mb-3">
                         <label for="rakit">Rakit</label>
                         <select class="form-select" id="rakit" name="rakit" required>
-                          <option value="1">On Process</option>
-                          <option value="2">Delayed</option>
-                          <option value="3">Finished</option>
+                          <option value="1" <%= product.rakit === 1 ? 'selected' : '' %>>On Process</option>
+                          <option value="2" <%= product.rakit === 2 ? 'selected' : '' %>>Delayed</option>
+                          <option value="3" <%= product.rakit === 3 ? 'selected' : '' %>>Finished</option>
                         </select>
                       </div>
                     </div>
@@ -109,9 +109,9 @@
                       <div class="mb-3">
                         <label for="qc">QC</label>
                         <select class="form-select" id="qc" name="qc" required>
-                          <option value="1">On Process</option>
-                          <option value="2">Delayed</option>
-                          <option value="3">Finished</option>
+                          <option value="1" <%= product.qc === 1 ? 'selected' : '' %>>On Process</option>
+                          <option value="2" <%= product.qc === 2 ? 'selected' : '' %>>Delayed</option>
+                          <option value="3" <%= product.qc === 3 ? 'selected' : '' %>>Finished</option>
                         </select>
                       </div>
                     </div>
@@ -119,14 +119,14 @@
                       <div class="mb-3">
                         <label for="packing">Packing</label>
                         <select class="form-select" id="packing" name="packing" required>
-                          <option value="1">On Process</option>
-                          <option value="2">Delayed</option>
-                          <option value="3">Finished</option>
+                          <option value="1" <%= product.packing === 1 ? 'selected' : '' %>>On Process</option>
+                          <option value="2" <%= product.packing === 2 ? 'selected' : '' %>>Delayed</option>
+                          <option value="3" <%= product.packing === 3 ? 'selected' : '' %>>Finished</option>
                         </select>
                       </div>
                     </div>
                     <div class="col-12">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary update-product" data-nomor_order="<%= product.nomor_order %>">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -142,7 +142,8 @@
         <%- include('includes/footer.ejs') %>
         <!-- / Footer -->
 
-        <div class="content-backdrop fade"></div>
+        <div class=" content-backdrop fade">
+        </div>
       </div>
       <!-- Content wrapper -->
     </div>

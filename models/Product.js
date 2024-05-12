@@ -26,6 +26,73 @@ module.exports = class Product {
     this.qc = qc;
     this.packing = packing;
   }
+  async updateByNomorOrder(nomor_order) {
+    try {
+      const sql = `
+        UPDATE product 
+        SET quantity = ?, nama_barang = ?, size = ?, tutup = ?, body = ?, elektroplating = ?, isi = ?, rakit = ?, qc = ?, packing = ?
+        WHERE nomor_order = ?
+      `;
+      const values = [
+        this.quantity,
+        this.nama_barang,
+        this.size,
+        this.tutup,
+        this.body,
+        this.elektroplating,
+        this.isi,
+        this.rakit,
+        this.qc,
+        this.packing,
+        nomor_order,
+      ];
+
+      const [result] = await db.execute(sql, values);
+      return result; // Mengembalikan hasil dari operasi UPDATE
+    } catch (err) {
+      throw new Error(`Error updating product: ${err.message}`);
+    }
+  }
+
+  static async findByNomorOrder(nomor_order) {
+    try {
+      const [rows] = await db.execute(
+        "SELECT * FROM product WHERE nomor_order = ?",
+        [nomor_order]
+      );
+      if (rows.length > 0) {
+        const {
+          quantity,
+          nama_barang,
+          size,
+          tutup,
+          body,
+          elektroplating,
+          isi,
+          rakit,
+          qc,
+          packing,
+        } = rows[0];
+        return new Product(
+          nomor_order,
+          quantity,
+          nama_barang,
+          size,
+          tutup,
+          body,
+          elektroplating,
+          isi,
+          rakit,
+          qc,
+          packing
+        );
+      }
+      return null;
+    } catch (err) {
+      throw new Error(`Error fetching product by nomor_order: ${err.message}`);
+    }
+  }
+
   async save() {
     try {
       const sql = `

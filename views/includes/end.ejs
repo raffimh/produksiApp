@@ -39,8 +39,8 @@
           closeButton: true,
           debug: false,
           newestOnTop: false,
-          progressBar: false,
-          positionClass: 'toast-bottom-left',
+          progressBar: true,
+          positionClass: 'toast-top-center',
           preventDuplicates: false,
           onclick: null,
           showDuration: '300',
@@ -64,25 +64,48 @@
 
         showStoredToastr();
 
-        // Menggunakan AJAX untuk menangani submit form
-        $("form").submit(function(e) {
+        // Event listener untuk submit product
+        $("form#submit-product").submit(function(e) {
           e.preventDefault(); // Menghentikan default form submission
 
           // Mengambil data form
           var formData = $(this).serialize();
-          // Melakukan AJAX POST request
+
+          // Melakukan AJAX POST request untuk submit product
           $.ajax({
             type: "POST",
             url: "/submit-product",
             data: formData,
             success: function(response) {
               // Simpan pesan sukses di local storage
-              localStorage.setItem('successMessage', 'Data berhasil disimpan!');
-              window.location.reload();
+              localStorage.setItem("successMessage", "Produk berhasil disimpan!");
+              window.location.reload(); // Muat ulang halaman setelah submit berhasil
             },
             error: function(error) {
               console.error("Error:", error.responseText);
-              toastr.error("Terjadi kesalahan saat menyimpan data.");
+              toastr.error("Terjadi kesalahan saat menyimpan produk. <br>Nomor Order sudah ada.");
+            },
+          });
+        });
+
+        // Event listener untuk edit product
+        $(".update-product").click(function() {
+          // Mengambil nomor_order dari data-nomor_order atribut tombol
+          var nomor_order = $(this).data("nomor_order");
+
+          // Melakukan AJAX POST request untuk edit product
+          $.ajax({
+            type: "POST",
+            url: "/edit-product/" + nomor_order,
+            data: $("form#edit-product-" + nomor_order).serialize(),
+            success: function(response) {
+              // Simpan pesan sukses di local storage
+              localStorage.setItem("successMessage", "Produk berhasil diperbarui!");
+              window.location.reload(); // Muat ulang halaman setelah edit berhasil
+            },
+            error: function(error) {
+              console.error("Error:", error.responseText);
+              toastr.error("Terjadi kesalahan saat memperbarui produk.");
             },
           });
         });

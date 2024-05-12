@@ -40,6 +40,68 @@ exports.getInputProduct = (req, res, next) => {
   });
 };
 
+exports.getEditProduct = async (req, res, next) => {
+  try {
+    const nomor_order = req.params.nomor_order;
+    const product = await Product.findByNomorOrder(nomor_order);
+
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    res.render("editProduct", {
+      pageTitle: "Edit Product",
+      path: "/edit-product",
+      currentPage: req.originalUrl,
+      product,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.postUpdateProduct = async (req, res, next) => {
+  try {
+    const {
+      nomor_order,
+      quantity,
+      nama_barang,
+      size,
+      tutup,
+      body,
+      elektroplating,
+      isi,
+      rakit,
+      qc,
+      packing,
+    } = req.body;
+
+    const product = await Product.findByNomorOrder(nomor_order);
+
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    product.quantity = quantity;
+    product.nama_barang = nama_barang;
+    product.size = size;
+    product.tutup = tutup;
+    product.body = body;
+    product.elektroplating = elektroplating;
+    product.isi = isi;
+    product.rakit = rakit;
+    product.qc = qc;
+    product.packing = packing;
+
+    await product.updateByNomorOrder(nomor_order);
+
+    res.status(200).send("Data berhasil disimpan!");
+  } catch (err) {
+    console.error("Error updating product:", err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 exports.getPostProduct = async (req, res, next) => {
   const {
     nomor_order,
