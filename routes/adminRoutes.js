@@ -8,4 +8,5 @@ router.get("/input-product", adminController.getInputProduct);
 router.get("/edit-product/:nomor_order", adminController.getEditProduct);
 router.post("/edit-product/:nomor_order", adminController.postUpdateProduct);
 router.post("/submit-product", adminController.getPostProduct);
+router.delete("/delete-product/:nomor_order", adminController.deleteProduct);
 module.exports = router;

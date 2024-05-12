@@ -129,4 +129,14 @@ module.exports = class Product {
       throw new Error(`Error fetching products: ${err.message}`);
     }
   }
+
+  async deleteByNomorOrder(nomor_order) {
+    try {
+      const sql = "DELETE FROM product WHERE nomor_order = ?";
+      const [result] = await db.execute(sql, [nomor_order]);
+      return result; // Mengembalikan hasil dari operasi DELETE
+    } catch (err) {
+      throw new Error(`Error deleting product: ${err.message}`);
+    }
+  }
 };

@@ -140,3 +140,20 @@ exports.getPostProduct = async (req, res, next) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    const { nomor_order } = req.params;
+    const product = await Product.findByNomorOrder(nomor_order);
+
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    await product.deleteByNomorOrder(nomor_order);
+    res.status(200).send("Product deleted successfully");
+  } catch (err) {
+    next(err);
+  }
+};
+
