@@ -35,13 +35,14 @@
   </div>
 
   <div class="menu-inner-shadow"></div>
-
+  <% if (user && user.role === 'office') { %>
   <li class="menu-item <%= currentPage === '/input-product' ? 'active' : '' %>">
     <a href="/input-product" class="menu-link">
       <i class="menu-icon tf-icons ri-edit-2-line"></i>
       <div data-i18n="Input Products">Input Products</div>
     </a>
   </li>
+  <% } %>
 
   <ul class="menu-inner py-1">
     <li class="menu-item <%= currentPage === '/datatables' ? 'active' : '' %>">

@@ -34,16 +34,22 @@ exports.getProducts = async (req, res, next) => {
 };
 
 exports.getInputProduct = (req, res, next) => {
+  const userRole = req.session.user?.role;
+  if (userRole !== "office") {
+    return res.status(403).send("Forbidden");
+  }
   res.render("inputProduct", {
     pageTitle: "Input Product",
     path: "/input-product",
     currentPage: req.originalUrl,
+    user: req.session.user,
   });
 };
 
 exports.getEditProduct = async (req, res, next) => {
   try {
     const nomor_order = req.params.nomor_order;
+    const userRole = req.session.user?.role;
     const product = await Product.findByNomorOrder(nomor_order);
 
     if (!product) {
@@ -55,6 +61,8 @@ exports.getEditProduct = async (req, res, next) => {
       path: "/edit-product",
       currentPage: req.originalUrl,
       product,
+      userRole,
+      user: req.session.user,
     });
   } catch (err) {
     next(err);
@@ -182,6 +190,7 @@ exports.getFinished = (req, res, next) => {
     pageTitle: "Finished Product",
     path: "/finished-product",
     currentPage: req.originalUrl,
+    user: req.session.user,
   });
 };
 
@@ -194,5 +203,3 @@ exports.getFinishedProduct = async (req, res, next) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-

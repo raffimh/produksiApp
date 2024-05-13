@@ -33,25 +33,25 @@
                   <form action="/edit-product/<%= product.nomor_order%>" id="edit-product-<%= product.nomor_order %>" method="POST" class="row g-3">
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="text" class="form-control" id="noOrder" name="nomor_order" placeholder="1212" value="<%= product.nomor_order %>  " required>
+                        <input type="text" class="form-control" id="noOrder" name="nomor_order" placeholder="1212" value="<%= product.nomor_order %>" <% if (userRole !== 'office') { %> disabled <% } %> required>
                         <label for="noOrder">No. Order</label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="120" value="<%= product.quantity %>" required>
+                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="120" value="<%= product.quantity %>" <% if (userRole !== 'office') { %> disabled <% } %> required>
                         <label for="quantity">Quantity</label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="text" class="form-control" id="namaBarang" name="nama_barang" placeholder="Barang Produksi" value="<%= product.nama_barang %>" required>
+                        <input type="text" class="form-control" id="namaBarang" name="nama_barang" placeholder="Barang Produksi" value="<%= product.nama_barang %>" <% if (userRole !== 'office') { %> disabled <% } %> required>
                         <label for="namaBarang">Nama Barang</label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
-                        <input type="number" class="form-control" id="size" name="size" placeholder="50" value="<%= product.size %>" required>
+                        <input type="number" class="form-control" id="size" name="size" placeholder="50" value="<%= product.size %>" <% if (userRole !== 'office') { %> disabled <% } %> required>
                         <label for="size">Size</label>
                       </div>
                     </div>

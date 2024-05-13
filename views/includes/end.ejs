@@ -54,12 +54,16 @@
           hideMethod: 'fadeOut'
         };
 
-        // Fungsi untuk menampilkan pesan toastr dari local storage
         function showStoredToastr() {
-          const storedMessage = localStorage.getItem('successMessage');
-          if (storedMessage) {
-            toastr.success(storedMessage);
-            localStorage.removeItem('successMessage'); // Hapus pesan dari local storage setelah ditampilkan
+          const storedSuccessMessage = localStorage.getItem('successMessage');
+          const storedErrorMessage = localStorage.getItem('errorMessage');
+
+          if (storedSuccessMessage) {
+            toastr.success(storedSuccessMessage);
+            localStorage.removeItem('successMessage'); // Hapus pesan sukses dari local storage setelah ditampilkan
+          } else if (storedErrorMessage) {
+            toastr.error(storedErrorMessage);
+            localStorage.removeItem('errorMessage'); // Hapus pesan error dari local storage setelah ditampilkan
           }
         }
 
@@ -145,8 +149,30 @@
         });
 
       });
-      // Tangani logout saat tombol logout ditekan
       document.getElementById('logoutButton').addEventListener('click', function(e) {
+        e.preventDefault(); // Mencegah tindakan default link
+
+        // Kirim permintaan logout ke server menggunakan fetch
+        fetch('/auth/logout', {
+            method: 'POST'
+          })
+          .then(response => {
+            if (response.ok) {
+              // Jika logout berhasil, tampilkan pesan sukses menggunakan toastr
+              localStorage.setItem("successMessage", "Logout berhasil!");
+              window.location.href = '/'; // Ganti dengan URL tujuan setelah logout
+
+            } else {
+              // Jika terjadi kesalahan saat logout, tampilkan pesan error
+              toastr.error('Failed to logout');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            toastr.error('Error occurred during logout');
+          });
+      });
+      document.getElementById('logoutButtonNavbar').addEventListener('click', function(e) {
         e.preventDefault(); // Mencegah tindakan default link
 
         // Kirim permintaan logout ke server menggunakan fetch

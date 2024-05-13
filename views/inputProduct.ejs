@@ -30,6 +30,9 @@
             <div class="col-md-8">
               <div class="card mb-6">
                 <div class="card-body demo-vertical-spacing demo-only-element">
+                  <% if (user && user.role === 'office') { %>
+                  <h5>Role anda adalah <span style="text-decoration: underline;"><%= user.role %></span></h5>
+                  <% } %>
                   <form action="/submit-product" id="submit-product" method="POST" class="row g-3">
                     <div class="col-md-6">
                       <div class="form-floating form-floating-outline mb-6 mb-3">
@@ -55,6 +58,7 @@
                         <label for="size">Size</label>
                       </div>
                     </div>
+
                     <div class="col-md-6">
                       <div class="mb-3">
                         <label for="tutup">Tutup</label>
