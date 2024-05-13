@@ -25,7 +25,7 @@ exports.getProducts = async (req, res, next) => {
       rakit: product.rakit,
       qc: product.qc,
       packing: product.packing,
-      selesai: product.selesai
+      selesai: product.selesai,
     }));
     res.json({ data: formattedProducts });
   } catch (err) {
@@ -168,37 +168,34 @@ exports.postUpdateProduct = async (req, res, next) => {
 
     await product.updateByNomorOrder(nomor_order);
 
-    // Check if all stages are finished
-    if (
+    // Check if all stages are finished and selesai matches quantity
+    const allStagesCompleted =
       product.tutup.toString() === "3" &&
       product.body.toString() === "3" &&
       product.elektroplating.toString() === "3" &&
       product.isi.toString() === "3" &&
       product.rakit.toString() === "3" &&
       product.qc.toString() === "3" &&
-      product.packing.toString() === "3"
-    ) {
-      try {
-        const existingFinishedProduct = await Finished.findByNomorOrder(
-          nomor_order
-        );
+      product.packing.toString() === "3";
 
-        if (!existingFinishedProduct) {
-          const finishedProduct = new Finished(
-            null,
-            product.nomor_order,
-            product.quantity,
-            product.nama_barang,
-            product.size
-          );
-          await finishedProduct.save();
-        } else {
-          throw new Error(
-            "Finished product with the same nomor_order already exists"
-          );
-        }
-      } catch (error) {
-        throw new Error("Error saving finished product:", error);
+    if (allStagesCompleted && product.selesai === product.quantity) {
+      const existingFinishedProduct = await Finished.findByNomorOrder(
+        nomor_order
+      );
+
+      if (!existingFinishedProduct) {
+        const finishedProduct = new Finished(
+          null,
+          product.nomor_order,
+          product.quantity,
+          product.nama_barang,
+          product.size
+        );
+        await finishedProduct.save();
+      } else {
+        throw new Error(
+          "Finished product with the same nomor_order already exists"
+        );
       }
     }
 
