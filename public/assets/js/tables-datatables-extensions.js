@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showStoredToastr() {
       const storedMessage = localStorage.getItem("successMessage");
       if (storedMessage) {
-        toastr.error(storedMessage);
+        toastr.success(storedMessage);
         localStorage.removeItem("successMessage"); // Hapus pesan dari local storage setelah ditampilkan
       }
     }

@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
+
+
 exports.postLogin = async (req, res) => {
   const { emailUsername, password } = req.body;
   try {
@@ -20,7 +22,8 @@ exports.postLogin = async (req, res) => {
 
     // Jika autentikasi berhasil, lakukan sesuatu (contoh: membuat sesi atau token)
     // kirim respon ke ajax
-    res.redirect("/datatables");
+    // res.redirect("/datatables");
+    res.status(200).send("Login successful");
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");

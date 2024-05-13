@@ -34,7 +34,6 @@
     <script src="assets/vendor/libs/toastr/toastr.js"></script>
     <script src="assets/js/tables-datatables-advanced.js"></script>
 
-
     <script>
       $(document).ready(function() {
         toastr.options = {
@@ -66,12 +65,11 @@
 
         showStoredToastr();
 
-        // Login form
+        // // Login form
         // $("form#formLogin").submit(function(e) {
         //   e.preventDefault();
 
         //   const formData = $(this).serialize();
-        //   console.log("Form data:", formData);
 
         //   $.ajax({
         //     type: "POST",
@@ -81,8 +79,9 @@
         //       console.log("Response dari server:", response);
 
         //       // Redirect ke halaman setelah login berhasil
-        //       localStorage.setItem("successMessage", "Berhasil Login");
+        //       // toastr.success("Berhasil Login");
         //       window.location.href = '/datatables';
+        //       localStorage.setItem("successMessage", "Berhasil Login");
         //     },
         //     error: function(xhr, status, error) {
         //       console.error("Error:", error); // Tampilkan error di console untuk debugging
@@ -91,34 +90,6 @@
         //     }
         //   });
         // });
-
-        $("form#formLogin").submit(function(e) {
-          e.preventDefault();
-
-          const formData = $(this).serialize();
-
-          $.ajax({
-            type: "POST",
-            url: "/api/login",
-            data: formData,
-            dataType: "json",
-            contentType: "application/x-www-form-urlencoded",
-            success: function(response) {
-              if (response.success) {
-                // Login berhasil, redirect ke halaman /datatables
-                window.location.href = "/datatables";
-              } else {
-                // Login gagal
-                toastr.error(response.message);
-              }
-            },
-            error: function(xhr, status, error) {
-              console.error("Error:", error);
-              console.error("Server Response:", xhr.responseText);
-              toastr.error("Terjadi kesalahan saat login: " + xhr.responseText);
-            }
-          });
-        });
 
         $("form#formSignup").submit(function(e) {
           e.preventDefault();

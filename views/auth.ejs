@@ -42,7 +42,7 @@
             <h4 class="mb-1">Welcome to Production App</h4>
             <p class="mb-5">Please sign-in to your account</p>
 
-            <form action="/auth/login" method="POST" id="formAuthentication formLogin" class=" mb-5">
+            <form action="/auth/login" method="POST" id="formAuthentication" class=" mb-5">
               <div class="form-floating form-floating-outline mb-5">
                 <input type="text" class="form-control" id="email" name="emailUsername" placeholder="Enter your username" autofocus />
                 <label for="email">Username</label>
@@ -65,12 +65,12 @@
                     Remember Me
                   </label>
                 </div>
-                <a href="auth-forgot-password-basic.html" class="float-end mb-1 mt-2">
+                <!-- <a href="auth-forgot-password-basic.html" class="float-end mb-1 mt-2">
                   <span>Forgot Password?</span>
-                </a>
+                </a> -->
               </div>
               <div class="mb-5">
-                <button class="btn btn-primary d-grid w-100" type="submit">
+                <button class="btn btn-primary d-grid w-100" type="submit" id="signInBtn">
                   Sign in
                 </button>
               </div>
@@ -78,7 +78,7 @@
 
             <p class="text-center">
               <span>New on our platform?</span>
-              <a href="auth-register-basic.html">
+              <a href="/register">
                 <span>Create an account</span>
               </a>
             </p>
