@@ -91,27 +91,7 @@
         //   });
         // });
 
-        $("form#formSignup").submit(function(e) {
-          e.preventDefault();
 
-          const formData = $(this).serialize();
-
-          $.ajax({
-            type: "POST",
-            url: "/auth/register", // Rute untuk pendaftaran
-            data: formData,
-            success: function(response) {
-              console.log(response);
-              // Redirect ke halaman setelah pendaftaran berhasil
-              localStorage.setItem("successMessage", "Berhasil Register");
-              window.location.href = '/';
-            },
-            error: function(error) {
-              console.error("Error:", error.responseText);
-              alert("Error registering user");
-            }
-          });
-        });
 
         // Event listener untuk submit product
         $("form#submit-product").submit(function(e) {
@@ -164,6 +144,30 @@
           });
         });
 
+      });
+      // Tangani logout saat tombol logout ditekan
+      document.getElementById('logoutButton').addEventListener('click', function(e) {
+        e.preventDefault(); // Mencegah tindakan default link
+
+        // Kirim permintaan logout ke server menggunakan fetch
+        fetch('/auth/logout', {
+            method: 'POST'
+          })
+          .then(response => {
+            if (response.ok) {
+              // Jika logout berhasil, tampilkan pesan sukses menggunakan toastr
+              localStorage.setItem("successMessage", "Logout berhasil!");
+              window.location.href = '/'; // Ganti dengan URL tujuan setelah logout
+
+            } else {
+              // Jika terjadi kesalahan saat logout, tampilkan pesan error
+              toastr.error('Failed to logout');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            toastr.error('Error occurred during logout');
+          });
       });
     </script>
 

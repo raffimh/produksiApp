@@ -1,8 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-
-
 exports.postLogin = async (req, res) => {
   const { emailUsername, password } = req.body;
   try {
@@ -20,13 +18,22 @@ exports.postLogin = async (req, res) => {
       return res.status(401).send("Invalid match password");
     }
 
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+      nama: user.nama,
+      role: user.role,
+    };
+
     // Jika autentikasi berhasil, lakukan sesuatu (contoh: membuat sesi atau token)
     // kirim respon ke ajax
     // res.redirect("/datatables");
-    res.status(200).send("Login successful");
+    res
+      .status(200)
+      .json({ message: "Login successful", user: req.session.user });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -70,4 +77,15 @@ exports.register = async (req, res) => {
     console.error("Error registering user:", error);
     res.status(500).send("Internal Server Error");
   }
+};
+
+exports.logout = (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      res.status(200).json({ message: "Logout successful" });
+    }
+
+    res.clearCookie("sid");
+    res.redirect("/");
+  });
 };

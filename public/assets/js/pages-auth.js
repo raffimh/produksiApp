@@ -228,3 +228,25 @@ $("form#formAuthentication").submit(function (e) {
     },
   });
 });
+
+$("form#formSignup").submit(function (e) {
+  e.preventDefault();
+
+  const formData = $(this).serialize();
+
+  $.ajax({
+    type: "POST",
+    url: "/auth/register", // Rute untuk pendaftaran
+    data: formData,
+    success: function (response) {
+      console.log(response);
+      // Redirect ke halaman setelah pendaftaran berhasil
+      localStorage.setItem("successMessage", "Berhasil Register");
+      window.location.href = "/";
+    },
+    error: function (error) {
+      console.error("Error:", error.responseText);
+      alert("Error registering user");
+    },
+  });
+});

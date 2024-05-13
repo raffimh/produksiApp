@@ -7,6 +7,7 @@ router.get("/", indexController.getIndex);
 router.get("/register", indexController.getRegister);
 router.post("/auth/login", validateLoginForm, indexController.postLogin);
 router.post("/auth/register", indexController.register);
+router.post("/auth/logout", indexController.logout);
 
 module.exports = router;
 // Path: routes/auth.js

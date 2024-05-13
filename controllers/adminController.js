@@ -6,6 +6,7 @@ exports.getDatatables = (req, res, next) => {
     pageTitle: "Datatables",
     path: "/datatables",
     currentPage: req.originalUrl,
+    user: req.session.user,
   });
 };
 
