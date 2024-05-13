@@ -74,7 +74,7 @@
   direction: ltr !important;
 }
 
-[dir='rtl'] .rtl-only {
+[dir="rtl"] .rtl-only {
   display: block !important;
 }
 
@@ -109,4 +109,9 @@
 .layout-demo-info {
   text-align: center;
   margin-top: 1.25rem;
+}
+
+input[readonly] {
+  background-color: #f8f9fa; /* Warna latar belakang yang lebih gelap */
+  color: #6c757d; /* Warna teks yang lebih gelap */
 }

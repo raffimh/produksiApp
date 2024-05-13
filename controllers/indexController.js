@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const axios = require("axios");
 
 exports.postLogin = async (req, res) => {
   const { emailUsername, password } = req.body;
@@ -52,10 +53,19 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.register = async (req, res) => {
-  const { emailUsername, name, password, role } = req.body;
+  const { emailUsername, name, password, role, recaptchaToken } = req.body;
 
   try {
     // Periksa apakah pengguna sudah terdaftar berdasarkan username
+    const secretKey = process.env.SECRET_KEY;
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
+
+    const response = await axios.post(verifyUrl);
+    const { success } = response.data;
+
+    if (!success) {
+      return res.status(400).send("reCAPTCHA verification failed");
+    }
     const existingUser = await User.findByUsername(emailUsername);
 
     if (existingUser) {

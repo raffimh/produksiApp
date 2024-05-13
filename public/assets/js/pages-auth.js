@@ -214,39 +214,84 @@ $("form#formAuthentication").submit(function (e) {
     type: "POST",
     url: "/auth/login",
     data: formData,
+    dataType: "json",
     success: function (response) {
-      console.log("Response dari server:", response);
-
       // Redirect to the data tables page after successful login
       window.location.href = "/datatables";
       localStorage.setItem("successMessage", "Berhasil Login");
     },
     error: function (xhr, status, error) {
-      console.error("Error:", error); // Log error details to console for debugging
-      console.error("Server Response:", xhr.responseText); // Log server response to console
-      toastr.error("Error: " + xhr.responseText); // Show error message to user
+      try {
+        const errorResponse = JSON.parse(xhr.responseText);
+        if (
+          errorResponse &&
+          errorResponse.errors &&
+          errorResponse.errors.length > 0
+        ) {
+          const errorMessages = errorResponse.errors
+            .map(error => error.msg)
+            .join(", ");
+          toastr.error("Validation Error: " + errorMessages); // Tampilkan pesan kesalahan validasi
+        } else {
+          toastr.error("Unexpected Error: " + xhr.responseText); // Tampilkan pesan kesalahan umum
+        }
+      } catch (parseError) {
+        toastr.error("Invalid username or password");
+      }
     },
   });
 });
-
 $("form#formSignup").submit(function (e) {
   e.preventDefault();
 
   const formData = $(this).serialize();
 
+  // Dapatkan token reCAPTCHA setelah formulir dikirim
+  const recaptchaToken = grecaptcha.getResponse();
+
+  // Jika token kosong, tampilkan pesan error
+  if (!recaptchaToken) {
+    alert("Please complete the reCAPTCHA challenge.");
+    return;
+  }
+
+  // Tambahkan token reCAPTCHA ke data form
+  const fullFormData = formData + `&recaptchaToken=${recaptchaToken}`;
+
   $.ajax({
     type: "POST",
-    url: "/auth/register", // Rute untuk pendaftaran
-    data: formData,
+    url: "/auth/register",
+    data: fullFormData,
     success: function (response) {
       console.log(response);
-      // Redirect ke halaman setelah pendaftaran berhasil
       localStorage.setItem("successMessage", "Berhasil Register");
       window.location.href = "/";
     },
-    error: function (error) {
-      console.error("Error:", error.responseText);
+    error: function (xhr) {
+      console.error("Error:", xhr.responseText);
       alert("Error registering user");
     },
   });
 });
+
+// $("form#formSignup").submit(function (e) {
+//   e.preventDefault();
+
+//   const formData = $(this).serialize();
+
+//   $.ajax({
+//     type: "POST",
+//     url: "/auth/register", // Rute untuk pendaftaran
+//     data: formData,
+//     success: function (response) {
+//       console.log(response);
+//       // Redirect ke halaman setelah pendaftaran berhasil
+//       localStorage.setItem("successMessage", "Berhasil Register");
+//       window.location.href = "/";
+//     },
+//     error: function (error) {
+//       console.error("Error:", error.responseText);
+//       alert("Error registering user");
+//     },
+//   });
+// });
