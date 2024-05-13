@@ -98,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "rakit", render: translateStatus },
         { data: "qc", render: translateStatus },
         { data: "packing", render: translateStatus },
+        { data: "selesai" },
         {
           data: null,
           render: function (data, type, full, meta) {

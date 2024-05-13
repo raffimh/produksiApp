@@ -125,6 +125,13 @@
                         </select>
                       </div>
                     </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="selesai">Selesai</label>
+                        <input type="number" class="form-control" id="quantity" name="selesai" placeholder="120" value="<%= product.selesai %>" required>
+                      </div>
+                    </div>
+
                     <div class="col-12">
                       <button type="submit" class="btn btn-primary update-product" data-nomor_order="<%= product.nomor_order %>">Submit</button>
                     </div>

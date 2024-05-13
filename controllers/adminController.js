@@ -25,6 +25,7 @@ exports.getProducts = async (req, res, next) => {
       rakit: product.rakit,
       qc: product.qc,
       packing: product.packing,
+      selesai: product.selesai
     }));
     res.json({ data: formattedProducts });
   } catch (err) {
@@ -144,6 +145,7 @@ exports.postUpdateProduct = async (req, res, next) => {
       rakit,
       qc,
       packing,
+      selesai,
     } = req.body;
 
     const product = await Product.findByNomorOrder(nomor_order);
@@ -162,6 +164,7 @@ exports.postUpdateProduct = async (req, res, next) => {
     product.rakit = rakit;
     product.qc = qc;
     product.packing = packing;
+    product.selesai = selesai;
 
     await product.updateByNomorOrder(nomor_order);
 
@@ -219,7 +222,6 @@ exports.getPostProduct = async (req, res, next) => {
     qc,
     packing,
   } = req.body;
-  console.log(req.body);
   try {
     const product = new Product(
       nomor_order,

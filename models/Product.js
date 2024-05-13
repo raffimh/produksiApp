@@ -12,7 +12,8 @@ module.exports = class Product {
     isi,
     rakit,
     qc,
-    packing
+    packing,
+    selesai
   ) {
     this.nomor_order = nomor_order;
     this.quantity = quantity;
@@ -25,12 +26,13 @@ module.exports = class Product {
     this.rakit = rakit;
     this.qc = qc;
     this.packing = packing;
+    this.selesai = selesai;
   }
   async updateByNomorOrder(nomor_order) {
     try {
       const sql = `
         UPDATE product 
-        SET quantity = ?, nama_barang = ?, size = ?, tutup = ?, body = ?, elektroplating = ?, isi = ?, rakit = ?, qc = ?, packing = ?
+        SET quantity = ?, nama_barang = ?, size = ?, tutup = ?, body = ?, elektroplating = ?, isi = ?, rakit = ?, qc = ?, packing = ?, selesai = ?
         WHERE nomor_order = ?
       `;
       const values = [
@@ -44,6 +46,7 @@ module.exports = class Product {
         this.rakit,
         this.qc,
         this.packing,
+        this.selesai,
         nomor_order,
       ];
 
@@ -72,6 +75,7 @@ module.exports = class Product {
           rakit,
           qc,
           packing,
+          selesai,
         } = rows[0];
         return new Product(
           nomor_order,
@@ -84,7 +88,8 @@ module.exports = class Product {
           isi,
           rakit,
           qc,
-          packing
+          packing,
+          selesai
         );
       }
       return null;
@@ -97,8 +102,8 @@ module.exports = class Product {
     try {
       const sql = `
         INSERT INTO product 
-        (nomor_order, quantity, nama_barang, size, tutup, body, elektroplating, isi, rakit, qc, packing) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (nomor_order, quantity, nama_barang, size, tutup, body, elektroplating, isi, rakit, qc, packing, selesai) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `;
       const values = [
         this.nomor_order,
@@ -112,6 +117,7 @@ module.exports = class Product {
         this.rakit,
         this.qc,
         this.packing,
+        0,
       ];
 
       const [result] = await db.execute(sql, values);
