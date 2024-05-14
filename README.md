@@ -7,6 +7,7 @@ Welcome to the information system built using Express.js as the backend and EJS 
 1. **Product Management**
    - Add, edit, and delete products.
    - Display a list of products with search and sort capabilities.
+   - Finished product
 
 2. **Order Management**
    - Manage customer orders.
