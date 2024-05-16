@@ -12,6 +12,7 @@ Welcome to the information system built using Express.js as the backend and EJS 
 2. **Order Management**
    - Manage customer orders.
    - Track order progress (on progress, delayed, finished).
+   - Track
 
 3. **Reporting**
    - View sales reports and product analysis.
