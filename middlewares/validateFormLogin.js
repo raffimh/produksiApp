@@ -2,7 +2,7 @@ const { body, validationResult } = require("express-validator");
 
 // Middleware untuk validasi login form
 const validateLoginForm = [
-  // Validasi email/username
+  // Validasi email/username saat input
   body("emailUsername")
     .notEmpty()
     .withMessage("Email/username cannot be empty")
