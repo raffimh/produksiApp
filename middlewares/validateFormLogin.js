@@ -9,7 +9,7 @@ const validateLoginForm = [
     .isLength({ min: 6 })
     .withMessage("Email/username must be at least 6 characters"),
 
-  // Validasi password
+  // Validasi password saat input
   body("password")
     .notEmpty()
     .withMessage("Password cannot be empty")
