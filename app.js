@@ -9,7 +9,6 @@ const port = process.env.PORT || 3000;
 const path = require("path");
 const indexRoutes = require("./routes/indexRoutes");
 const adminRoutes = require("./routes/adminRoutes");
-// const db = require("./config/database");
 
 // app.use(morgan("dev"));
 app.use(corst());
