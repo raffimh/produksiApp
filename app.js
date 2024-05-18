@@ -28,13 +28,6 @@ app.use(
   })
 );
 
-// db.execute("SELECT * FROM product")
-//   .then(result => {
-//     console.log(result[0], result[1]);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
 
 app.use(adminRoutes);
 app.use(indexRoutes);
