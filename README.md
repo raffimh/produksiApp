@@ -38,7 +38,7 @@ This system supports two user roles: Office and Production.
 ### `npm install`
 
 2. **Start the Application**
-After the installation is complete, start the application by running the command
+After the installation is complete, start the application by running the command:
 
 ### `npm start`
 
