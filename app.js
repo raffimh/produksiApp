@@ -9,7 +9,6 @@ const port = process.env.PORT || 3000;
 const path = require("path");
 const indexRoutes = require("./routes/indexRoutes");
 const adminRoutes = require("./routes/adminRoutes");
-// const db = require("./config/database");
 
 // app.use(morgan("dev"));
 app.use(corst());
@@ -28,13 +27,6 @@ app.use(
   })
 );
 
-// db.execute("SELECT * FROM product")
-//   .then(result => {
-//     console.log(result[0], result[1]);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
 
 app.use(adminRoutes);
 app.use(indexRoutes);

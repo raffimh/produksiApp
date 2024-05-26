@@ -2,14 +2,14 @@ const { body, validationResult } = require("express-validator");
 
 // Middleware untuk validasi login form
 const validateLoginForm = [
-  // Validasi email/username
+  // Validasi email/username saat input
   body("emailUsername")
     .notEmpty()
     .withMessage("Email/username cannot be empty")
     .isLength({ min: 6 })
     .withMessage("Email/username must be at least 6 characters"),
 
-  // Validasi password
+  // Validasi password saat input
   body("password")
     .notEmpty()
     .withMessage("Password cannot be empty")
