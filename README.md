@@ -14,7 +14,7 @@ Welcome to the information system built using Express.js as the backend and EJS 
    - Track order progress (on progress, delayed, finished).
    - Track finished product
 
-3. **Reporting*
+3. **Reporting**
    - View sales reports and product analysis.
 
 ## User Roles
