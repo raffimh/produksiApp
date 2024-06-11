@@ -10,7 +10,7 @@ const path = require("path");
 const indexRoutes = require("./routes/indexRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
-// app.use(morgan("dev"));
+// app.use(morgan("dev"))
 app.use(corst());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
